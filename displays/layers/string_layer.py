@@ -1,6 +1,6 @@
 import os
 
-from ledboard.displays.layers.layer import Layer
+from displays.layers.layer import Layer
 
 PATTERNS_DIR = 'displays/patterns'
 

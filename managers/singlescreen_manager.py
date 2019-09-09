@@ -1,5 +1,5 @@
-from ledboard.displays.display import Display
-from ledboard.managers.manager import Manager
+from displays.display import Display
+from managers.manager import Manager
 
 
 class SingleScreenManager(Manager):

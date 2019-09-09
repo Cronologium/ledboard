@@ -1,7 +1,7 @@
-from ledboard.data_source.time_source import TimeSource
-from ledboard.displays.display import Display
-from ledboard.displays.layers.string_layer import StringLayer
-from ledboard.managers.singlescreen_manager import SingleScreenManager
+from data_source.time_source import TimeSource
+from displays.display import Display
+from displays.layers.string_layer import StringLayer
+from managers.singlescreen_manager import SingleScreenManager
 
 BOARD_SIZE = (16, 16)
 

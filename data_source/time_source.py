@@ -1,6 +1,6 @@
 import datetime
 
-from ledboard.data_source.source import Source
+from data_source.source import Source
 
 
 class TimeSource(Source):

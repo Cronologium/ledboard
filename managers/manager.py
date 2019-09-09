@@ -4,10 +4,10 @@ from threading import Thread, Lock
 
 import board
 
-from ledboard.data_source.source import Source
-from ledboard.displays.display import Display
-from ledboard.displays.layers.layer import Layer
-from ledboard.screen import ScreenDriver
+from data_source.source import Source
+from displays.display import Display
+from displays.layers.layer import Layer
+from screen import ScreenDriver
 from queue import PriorityQueue
 
 class MyPriorityQueue(PriorityQueue):
