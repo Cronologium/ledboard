@@ -115,7 +115,7 @@ class Manager:
                     break
             for task in p:
                 self.event_queue.put(task)
-            time.sleep(self.refresh_rate)
+            time.sleep(1 / self.refresh_rate)
 
 
 
