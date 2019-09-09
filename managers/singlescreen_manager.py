@@ -12,6 +12,6 @@ class SingleScreenManager(Manager):
             self.screen_key = id
         super().add(id, d)
 
-    def __do_display_tick(self):
+    def _do_display_tick(self):
         self.update_display(self.screen_key)
         self.print_display(self.screen_key)

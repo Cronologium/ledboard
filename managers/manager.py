@@ -29,7 +29,7 @@ class Manager:
         self.driver = ScreenDriver(board.D18, sx, sy)
         self.event_queue = MyPriorityQueue()
 
-    def __do_display_tick(self):
+    def _do_display_tick(self):
         raise NotImplementedError
 
     def __loop(self):
@@ -103,8 +103,7 @@ class Manager:
             p = []
             while True:
                 top = self.event_queue.peek()
-
-                if top[0] <= datetime.datetime.now():
+                if top is not None and top[0] <= datetime.datetime.now():
                     t, key = self.event_queue.get()
                     with self.manager_lock:
                         self.config[key]['instance'].update()

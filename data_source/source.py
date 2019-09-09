@@ -8,7 +8,7 @@ class Source:
         self.old_source = None
         self.data = None
 
-    def __fetch(self):
+    def _fetch(self):
         raise NotImplementedError
 
     def update(self):
