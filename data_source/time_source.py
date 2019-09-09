@@ -7,4 +7,4 @@ class TimeSource(Source):
     def __fetch(self):
         now = datetime.datetime.now()
 
-        return f"{now.minute}{now.second}"
+        return "{0}{1}".format(now.minute, now.second)

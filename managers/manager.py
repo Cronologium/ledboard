@@ -64,7 +64,7 @@ class Manager:
             if key in self.config:
                 return self.config[key]['instance']
             else:
-                raise Exception(f"No instance with name {key} found")
+                raise Exception("No instance with name {0} found".format(key))
 
     def update_display(self, key):
         with self.manager_lock:
@@ -100,17 +100,22 @@ class Manager:
                     if 'start' in self.config[key] and self.config[key]['start'] is True:
                         self.event_queue.put((datetime.datetime.now(), key))
         while self.running:
+            p = []
             while True:
                 top = self.event_queue.peek()
+
                 if top[0] <= datetime.datetime.now():
                     t, key = self.event_queue.get()
                     with self.manager_lock:
                         self.config[key]['instance'].update()
                         if 'repeat' in self.config[key] and self.config[key]['repeat'] > 0:
-                            self.event_queue.put((datetime.datetime.now() + datetime.timedelta(seconds=self.config[key]['repeat'])))
+                            p.append((datetime.datetime.now() + datetime.timedelta(seconds=self.config[key]['repeat'])))
                     self.event_queue.task_done()
                 else:
                     break
+            for task in p:
+                self.event_queue.put(task)
+            time.sleep(self.refresh_rate)
 
 
 
