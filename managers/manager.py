@@ -78,12 +78,13 @@ class Manager:
             self.driver.show(self.config[key]['instance'].get_display_pixels())
 
     def save_ds_change(self, key, data):
-        old = self.config[key]['ds']
-        if old is None and data is not None \
-                or old is not None and data is None \
-                or old is not None and data is not None and old != data:
-            self.config[key]['ds'] = data
-            self.config[key]['ds_changed'] = True
+        with self.manager_lock:
+            old = self.config[key]['ds']
+            if old is None and data is not None \
+                    or old is not None and data is None \
+                    or old is not None and data is not None and old != data:
+                self.config[key]['ds'] = data
+                self.config[key]['ds_changed'] = True
 
     def get(self, id):
         return self.config[id]
@@ -91,7 +92,7 @@ class Manager:
     def notify(self, key):
         with self.manager_lock:
             for obs_layer_name in self.config[key]['notifiable']:
-                self.config[obs_layer_name]['ds'] = self.config[key]['instance'].data
+                self.save_ds_change(obs_layer_name, self.config[key]['instance'].data)
 
     def __manage(self):
         with self.manager_lock:
