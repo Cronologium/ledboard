@@ -16,8 +16,9 @@ def main():
         'instance': StringLayer(BOARD_SIZE[0], BOARD_SIZE[1], (205, 127, 50))
     })
     manager.add(DS_TIME, {
-        'instance': TimeSource(DS_TIME, TIMELAYER),
-        'repeat': 1
+        'instance': TimeSource(manager.get_instance(DS_TIME), TIMELAYER),
+        'repeat': 1,
+        'start': True
     })
     manager.add(TIMEDISPLAY, {
         'instance': Display(BOARD_SIZE[0], BOARD_SIZE[1]),

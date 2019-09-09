@@ -108,7 +108,7 @@ class Manager:
                     with self.manager_lock:
                         self.config[key]['instance'].update()
                         if 'repeat' in self.config[key] and self.config[key]['repeat'] > 0:
-                            p.append((datetime.datetime.now() + datetime.timedelta(seconds=self.config[key]['repeat'])))
+                            p.append((datetime.datetime.now() + datetime.timedelta(seconds=self.config[key]['repeat']), key))
                     self.event_queue.task_done()
                 else:
                     break
