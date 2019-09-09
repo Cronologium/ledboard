@@ -19,7 +19,7 @@ class StringLayer(Layer):
             data = f.readlines()
         return [d[:-1] for d in data][::-1]
 
-    def notify(self, data):
+    def update(self, data):
         for k in range(min(self.string_limit, len(data))):
             ch = " "
             if k < len(data):
