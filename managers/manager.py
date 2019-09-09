@@ -34,7 +34,7 @@ class Manager:
 
     def __loop(self):
         while self.running:
-            self.__do_display_tick()
+            self._do_display_tick()
             time.sleep(1 / self.refresh_rate)
 
     def loop(self):
