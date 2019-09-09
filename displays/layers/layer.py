@@ -3,7 +3,7 @@ class Layer:
         self.maxx = maxx
         self.maxy = maxy
         self.sx = sx
-        self.sx = sy
+        self.sy = sy
         self.board = [
             [None for _ in range(self.maxy)] for _ in range(self.maxx)
         ]
