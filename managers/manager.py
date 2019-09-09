@@ -75,7 +75,7 @@ class Manager:
 
     def print_display(self, key):
         with self.manager_lock:
-            self.driver.show(self.config[key].get_display_pixels())
+            self.driver.show(self.config[key]['instance'].get_display_pixels())
 
     def save_ds_change(self, key, data):
         old = self.config[key]['ds']
