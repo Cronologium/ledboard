@@ -17,7 +17,7 @@ class StringLayer(Layer):
         data = None
         with open(os.path.join(PATTERNS_DIR, file), "r") as f:
             data = f.readlines()
-        return [d[:-1] for d in data][::-1]
+        return [d[:-1] for d in data]
 
     def update(self, data):
         for k in range(min(self.string_limit, len(data))):
