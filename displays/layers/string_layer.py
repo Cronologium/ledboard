@@ -10,7 +10,7 @@ class StringLayer(Layer):
         self.color = color
         self.string_limit = (maxx // 8) * (maxy // 8)
         self.patterns = {
-            key[:-4]: self.__read(key) for key in os.listdir(PATTERNS_DIR) if os.path.isfile(key)
+            key[0]: self.__read(key) for key in os.listdir(PATTERNS_DIR) if os.path.isfile(os.path.join(PATTERNS_DIR, key))
         }
 
     def __read(self, file):
