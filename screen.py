@@ -2,7 +2,7 @@ import neopixel
 
 
 class ScreenDriver:
-    def __init__(self, gpio_port, maxx, maxy, orientation=0):
+    def __init__(self, gpio_port, maxx, maxy, orientation=90):
         self.led_map = {}
         self.leds = maxx * maxy
         self.maxx = maxx
