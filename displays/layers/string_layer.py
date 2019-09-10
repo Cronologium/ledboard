@@ -31,5 +31,5 @@ class StringLayer(Layer):
             for xx in range(8):
                 for yy in range(8):
                     if self.patterns[ch][xx][yy] == '*':
-                        self.set(x * 8 + xx, y * 8 + yy, self.color)
+                        self.set(x * 8 - xx, y * 8 - yy, self.color)
 

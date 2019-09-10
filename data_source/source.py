@@ -15,9 +15,9 @@ class Source:
         self.old_source = self.data
         try:
             self.data = self._fetch()
-            if self.data is None and self.old_source is not None \
-                    or self.data is not None and self.old_source is None \
-                    or self.data is not None and self.old_source is not None and self.data != self.old_source:
+            if (self.data is None and self.old_source is not None) \
+                    or (self.data is not None and self.old_source is None) \
+                    or (self.data is not None and self.old_source is not None and self.data != self.old_source):
                 self.observable.notify(self.key)
         except Exception:
             print(traceback.format_exc())

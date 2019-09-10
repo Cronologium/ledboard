@@ -80,9 +80,9 @@ class Manager:
 
     def save_ds_change(self, key, data):
         old = self.config[key]['ds']
-        if old is None and data is not None \
-                or old is not None and data is None \
-                or old is not None and data is not None and old != data:
+        if (old is None and data is not None) \
+                or (old is not None and data is None) \
+                or (old is not None and data is not None and old != data):
             self.config[key]['ds'] = data
             self.config[key]['ds_changed'] = True
 
