@@ -36,6 +36,7 @@ class Manager:
         while self.running:
             self._do_display_tick()
             time.sleep(1 / self.refresh_rate)
+        self.driver.clear()
 
     def loop(self):
         self.running = True
