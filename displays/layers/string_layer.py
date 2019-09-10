@@ -28,6 +28,7 @@ class StringLayer(Layer):
                 continue
             x = k // (self.maxy // 8)
             y = k % (self.maxy // 8)
+            self.clear()
             for xx in range(8):
                 for yy in range(8):
                     if self.patterns[ch][xx][yy] == '*':
