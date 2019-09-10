@@ -78,13 +78,12 @@ class Manager:
             self.driver.show(self.config[key]['instance'].get_display_pixels())
 
     def save_ds_change(self, key, data):
-        with self.manager_lock:
-            old = self.config[key]['ds']
-            if old is None and data is not None \
-                    or old is not None and data is None \
-                    or old is not None and data is not None and old != data:
-                self.config[key]['ds'] = data
-                self.config[key]['ds_changed'] = True
+        old = self.config[key]['ds']
+        if old is None and data is not None \
+                or old is not None and data is None \
+                or old is not None and data is not None and old != data:
+            self.config[key]['ds'] = data
+            self.config[key]['ds_changed'] = True
 
     def get(self, id):
         return self.config[id]
