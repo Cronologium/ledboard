@@ -89,9 +89,8 @@ class Manager:
         return self.config[id]
 
     def notify(self, key):
-        with self.manager_lock:
-            for obs_layer_name in self.config[key]['notifiable']:
-                self.save_ds_change(obs_layer_name, self.config[key]['instance'].data)
+        for obs_layer_name in self.config[key]['notifiable']:
+            self.save_ds_change(obs_layer_name, self.config[key]['instance'].data)
 
     def __manage(self):
         with self.manager_lock:
