@@ -13,8 +13,8 @@ class Display:
         ]
         for x in range(self.maxx):
             for y in range(self.maxy):
-                for layer in self.layers[::-1]:
-                    if layer.sx <= x < layer.sx + layer.maxx and layer.sy <= y < layer.sy and layer.board[x][y] is not None:
+                for layer in self.layers:
+                    if layer.sx <= x < layer.sx + layer.maxx and layer.sy <= y < layer.sy + layer.maxy and layer.board[x][y] is not None:
                         board[x][y] = layer.board[x][y]
                         break
         return board
