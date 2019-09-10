@@ -2,7 +2,7 @@ import neopixel
 
 
 class ScreenDriver:
-    def __init__(self, gpio_port, maxx, maxy):
+    def __init__(self, gpio_port, maxx, maxy, orientation=0):
         self.led_map = {}
         self.leds = maxx * maxy
         self.maxx = maxx
@@ -13,10 +13,26 @@ class ScreenDriver:
 
         for x in range(self.maxx):
             for y in range(self.maxy):
-                if x % 2 == 0:
-                    self.led_map[(x, y)] = self.leds - 1 - (self.maxy * x + y)
-                else:
-                    self.led_map[(x, y)] = self.leds - 1 - (self.maxy * x + self.maxy - 1 - y)
+                if orientation == 0:
+                    if x % 2 == 0:
+                        self.led_map[(x, y)] = self.leds - self.maxy * (x + 1) + self.maxy - 1 - y
+                    else:
+                        self.led_map[(x, y)] = self.leds - self.maxy * (x + 1) + y
+                elif orientation == 90:
+                    if y % 2 == 0:
+                        self.led_map[(x, y)] = self.maxx * y + x
+                    else:
+                        self.led_map[(x, y)] = self.maxx * y + maxx - 1 - x
+                elif orientation == 180:
+                    if x % 2 == 0:
+                        self.led_map[(x, y)] = self.maxy * x + self.maxy - 1 - y
+                    else:
+                        self.led_map[(x, y)] = self.maxy * x + y
+                elif orientation == 270:
+                    if y % 2 == 0:
+                        self.led_map[(x, y)] = self.leds - self.maxx * (y + 1) + x
+                    else:
+                        self.led_map[(x, y)] = self.leds - self.maxx * (y + 1) + self.maxx - 1 - x
 
         self.board = [None for _ in range(self.leds)]
         self.neo = neopixel.NeoPixel(gpio_port, self.leds, brightness=0.1, auto_write=False)
