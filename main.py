@@ -19,7 +19,7 @@ def main():
         'instance': TimeSource(DS_TIME, manager),
         'repeat': 1,
         'start': True,
-        'notifiable': TIMELAYER
+        'notifiable': [TIMELAYER]
     })
     manager.add(TIMEDISPLAY, {
         'instance': Display(BOARD_SIZE[0], BOARD_SIZE[1]),
