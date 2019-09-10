@@ -22,7 +22,7 @@ class ScreenDriver:
                     if y % 2 == 0:
                         self.led_map[(x, y)] = self.maxx * y + x
                     else:
-                        self.led_map[(x, y)] = self.maxx * y + maxx - 1 - x
+                        self.led_map[(x, y)] = self.maxx * y + self.maxx - 1 - x
                 elif orientation == 180:
                     if x % 2 == 0:
                         self.led_map[(x, y)] = self.maxy * x + self.maxy - 1 - y
