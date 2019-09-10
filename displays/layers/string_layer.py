@@ -20,6 +20,7 @@ class StringLayer(Layer):
         return [d[:-1] for d in data]
 
     def update(self, data):
+        self.clear()
         for k in range(min(self.string_limit, len(data))):
             ch = " "
             if k < len(data):
@@ -28,7 +29,6 @@ class StringLayer(Layer):
                 continue
             x = k // (self.maxy // 8)
             y = k % (self.maxy // 8)
-            self.clear()
             for xx in range(8):
                 for yy in range(8):
                     if self.patterns[ch][xx][yy] == '*':
