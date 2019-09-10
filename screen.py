@@ -14,9 +14,9 @@ class ScreenDriver:
         for x in range(self.maxx):
             for y in range(self.maxy):
                 if x % 2 == 0:
-                    self.led_map[(x, y)] = self.leds - 1 - self.maxy * x + y
+                    self.led_map[(x, y)] = self.leds - 1 - (self.maxy * x + y)
                 else:
-                    self.led_map[(x, y)] = self.leds - 1 - self.maxy * x + self.maxy - 1 - y
+                    self.led_map[(x, y)] = self.leds - 1 - (self.maxy * x + self.maxy - 1 - y)
 
         self.board = [None for _ in range(self.leds)]
         self.neo = neopixel.NeoPixel(gpio_port, self.leds, brightness=0.1, auto_write=False)
