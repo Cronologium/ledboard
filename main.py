@@ -45,7 +45,7 @@ def main():
     })
 
     manager.add(RAIN_LAYER, {
-        'instance': RotatingLayer(BOARD_SIZE[0], BOARD_SIZE[1], rain_board, (1 / REFRESH_RATE, 0))
+        'instance': RotatingLayer(BOARD_SIZE[0], BOARD_SIZE[1], rain_board, (5 / REFRESH_RATE, 0))
     })
 
     '''
