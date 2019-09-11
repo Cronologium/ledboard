@@ -1,6 +1,6 @@
 from data_source.time_source import TimeSource
 from displays.display import Display
-from displays.layers.rotating_layer import RotatingLayer
+from displays.layers.sliding_layer import SlidingLayer
 from displays.layers.string_layer import StringLayer
 from managers.singlescreen_manager import SingleScreenManager
 from utils import hex2tuple
@@ -45,7 +45,7 @@ def main():
     })
 
     manager.add(RAIN_LAYER, {
-        'instance': RotatingLayer(BOARD_SIZE[0], BOARD_SIZE[1], rain_board, (5 / REFRESH_RATE, 0))
+        'instance': SlidingLayer(BOARD_SIZE[0], BOARD_SIZE[1], rain_board, (5 / REFRESH_RATE, 0))
     })
 
     '''
