@@ -1,13 +1,12 @@
 from displays.layers.layer import Layer
+from displays.layers.pixel_layer import PixelLayer
 
 
-class RotatingLayer(Layer):
+class RotatingLayer(PixelLayer):
     def __init__(self, maxx, maxy, pattern, direction, sx=0, sy=0):
-        super().__init__(maxx, maxy, sx=sx, sy=sy)
+        super().__init__(maxx, maxy, pattern, sx=sx, sy=sy)
         self.accumulated_delta = (0, 0)
         self.direction = direction
-        for square in pattern:
-            self.board[square[0]][square[1]] = square[2]
 
     def tick(self):
         self.accumulated_delta = tuple(sum(item) for item in zip(self.direction, self.accumulated_delta))
