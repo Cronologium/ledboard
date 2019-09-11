@@ -2,7 +2,7 @@ from displays.layers.layer import Layer
 from displays.layers.pixel_layer import PixelLayer
 
 
-class RotatingLayer(PixelLayer):
+class SlidingLayer(PixelLayer):
     def __init__(self, maxx, maxy, pattern, direction, sx=0, sy=0):
         super().__init__(maxx, maxy, pattern, sx=sx, sy=sy)
         self.accumulated_delta = (0, 0)
