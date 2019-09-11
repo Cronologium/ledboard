@@ -19,5 +19,8 @@ class Layer:
             [None for _ in range(self.maxy)] for _ in range(self.maxx)
         ]
 
+    def tick(self):
+        pass
+
 
 

@@ -8,6 +8,9 @@ class Display:
         self.layers = layers
 
     def get_display_pixels(self):
+        for layer in self.layers:
+            layer.tick()
+
         board = [
             [None for _ in range(self.maxy)] for _ in range(self.maxx)
         ]
