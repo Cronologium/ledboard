@@ -64,6 +64,9 @@ class RotatingGradientLayer(PixelLayer):
             self.reference_points = {
                 point_mapping[p]: self.reference_points[p] for p in self.reference_points
             }
+            self.clear()
+            for point, color in self.reference_points:
+                self.board[point] = color
         self._make_mix()
 
 

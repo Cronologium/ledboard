@@ -36,9 +36,9 @@ def spread_gradient_points(gradient_colors):
     ] + [
         (x, BOARD_SIZE[1] - 1) for x in range(BOARD_SIZE[0] - 1)
     ] + [
-        (BOARD_SIZE[0] - 1, y) for y in range(BOARD_SIZE[1] - 1, 0)
+        (BOARD_SIZE[0] - 1, y) for y in range(BOARD_SIZE[1] - 1, 0, -1)
     ] + [
-        (x, 0) for x in range(BOARD_SIZE[0] - 1, 0)
+        (x, 0) for x in range(BOARD_SIZE[0] - 1, 0, -1)
     ]
     return [
         marginal_points[k * (len(marginal_points) // len(gradient_colors)) + 1 * (k < len(marginal_points) % len(gradient_colors))] + (gradient_colors[k], ) for k in range(len(gradient_colors))
