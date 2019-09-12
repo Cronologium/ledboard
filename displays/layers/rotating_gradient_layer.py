@@ -25,8 +25,8 @@ class RotatingGradientLayer(PixelLayer):
                 if (x, y) in self.reference_points:
                     continue
                 self.board[x][y] = self._mix(
-                    sorted([(abs(x - key[0]) ** 2 + abs(y - key[1]) ** 2, value) for key, value in
-                            self.reference_points.items()])
+                    sorted([(abs(x - key[0]) ** 2 + abs(y - key[1]) ** 2, key) for key in
+                            self.reference_points])
                 )
 
     def tick(self):
