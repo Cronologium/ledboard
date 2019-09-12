@@ -14,10 +14,10 @@ class RotatingGradientLayer(PixelLayer):
     def _mix(self, mixer):
         ref_max = mixer[-1][0]
         total_proportion = sum([ref_max - mixer_color[0] for mixer_color in mixer])
-        return (
+        return tuple([
             sum([self.reference_points[mixer_color[1]][k] * (ref_max - mixer_color[0]) for mixer_color in mixer]) / total_proportion
             for k in range(3)
-        )
+        ])
 
     def _make_mix(self):
         for x in range(self.maxx):
