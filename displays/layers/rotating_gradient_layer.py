@@ -54,9 +54,9 @@ class RotatingGradientLayer(PixelLayer):
                             d = (delta_val, 0)
                     elif point[0] > point[1]: # under the main diagonal
                         if point[0] < self.maxy - 1 - point[1]: # above the secondary
-                            d = (0, -delta_val)
-                        elif point[0] > self.maxy - 1 - point[1]: # under the secondary
                             d = (-delta_val, 0)
+                        elif point[0] > self.maxy - 1 - point[1]: # under the secondary
+                            d = (0, -delta_val)
                     if sum(d) == 0: # it's placed on a diagonal, identify which
                         if point[0] == point[1]: # on first diagonal
                             if point[0] < self.maxy - 1 - point[1]: # above the secondary
