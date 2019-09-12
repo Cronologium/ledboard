@@ -15,7 +15,7 @@ class RotatingGradientLayer(PixelLayer):
         ref_max = mixer[-1][0]
         total_proportion = sum([ref_max - mixer_color[0] for mixer_color in mixer])
         return tuple([
-            sum([self.reference_points[mixer_color[1]][k] * (ref_max - mixer_color[0]) for mixer_color in mixer]) / total_proportion
+            int(sum([self.reference_points[mixer_color[1]][k] * (ref_max - mixer_color[0]) for mixer_color in mixer]) / total_proportion)
             for k in range(3)
         ])
 
@@ -33,41 +33,42 @@ class RotatingGradientLayer(PixelLayer):
         self.accumulated_delta += self.rotating_speed
         sign = (lambda x: (1, -1)[x < 0])
         delta_val = sign(self.rotating_speed)
-        while abs(self.accumulated_delta) >= 1:
-            self.accumulated_delta += -1 * delta_val
-            p = [key for key in self.reference_points]
-            point_mapping = {}
-            for point in p:
-                d = (0, 0)
-                if point[0] < point[1]: # above the main diagonal
-                    if point[0] < self.maxy - 1 - point[1]: # above the secondary diagonal
-                        d = (0, delta_val)
-                    elif point[0] > self.maxy - 1 - point[1]: # under the secondary
-                        d = (delta_val, 0)
-                elif point[0] > point[1]: # under the main diagonal
-                    if point[0] < self.maxy - 1 - point[1]: # above the secondary
-                        d = (0, -delta_val)
-                    elif point[0] > self.maxy - 1 - point[1]: # under the secondary
-                        d = (-delta_val, 0)
-                if sum(d) == 0: # it's placed on a diagonal, identify which
-                    if point[0] == point[1]: # on first diagonal
-                        if point[0] < self.maxy - 1 - point[1]: # above the secondary
-                            d = (delta_val * (delta_val == -1), delta_val * (delta_val == 1))
+        if abs(self.accumulated_delta) >= 1:
+            while abs(self.accumulated_delta) >= 1:
+                self.accumulated_delta += -1 * delta_val
+                p = [key for key in self.reference_points]
+                point_mapping = {}
+                for point in p:
+                    d = (0, 0)
+                    if point[0] < point[1]: # above the main diagonal
+                        if point[0] < self.maxy - 1 - point[1]: # above the secondary diagonal
+                            d = (0, delta_val)
                         elif point[0] > self.maxy - 1 - point[1]: # under the secondary
-                            d = (-delta_val * (delta_val == -1), -delta_val * (delta_val == 1))
-                    else: # on second diagonal
-                        if point[0] < point[1]: # above main diagonal
-                            d = (delta_val * (delta_val == 1), delta_val * (delta_val == -1))
-                        else:
-                            d = (-delta_val * (delta_val == 1), -delta_val * (delta_val == -1))
-                point_mapping[point] = (point[0] + d[0], point[1] + d[1])
-            self.reference_points = {
-                point_mapping[p]: self.reference_points[p] for p in self.reference_points
-            }
-            self.clear()
-            for point, color in self.reference_points:
-                self.board[point] = color
-        self._make_mix()
+                            d = (delta_val, 0)
+                    elif point[0] > point[1]: # under the main diagonal
+                        if point[0] < self.maxy - 1 - point[1]: # above the secondary
+                            d = (0, -delta_val)
+                        elif point[0] > self.maxy - 1 - point[1]: # under the secondary
+                            d = (-delta_val, 0)
+                    if sum(d) == 0: # it's placed on a diagonal, identify which
+                        if point[0] == point[1]: # on first diagonal
+                            if point[0] < self.maxy - 1 - point[1]: # above the secondary
+                                d = (delta_val * (delta_val == -1), delta_val * (delta_val == 1))
+                            elif point[0] > self.maxy - 1 - point[1]: # under the secondary
+                                d = (-delta_val * (delta_val == -1), -delta_val * (delta_val == 1))
+                        else: # on second diagonal
+                            if point[0] < point[1]: # above main diagonal
+                                d = (delta_val * (delta_val == 1), delta_val * (delta_val == -1))
+                            else:
+                                d = (-delta_val * (delta_val == 1), -delta_val * (delta_val == -1))
+                    point_mapping[point] = (point[0] + d[0], point[1] + d[1])
+                self.reference_points = {
+                    point_mapping[p]: self.reference_points[p] for p in self.reference_points
+                }
+                self.clear()
+                for point, color in self.reference_points:
+                    self.board[point] = color
+            self._make_mix()
 
 
 
