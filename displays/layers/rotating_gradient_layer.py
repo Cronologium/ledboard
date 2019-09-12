@@ -2,6 +2,7 @@ import math
 
 from displays.layers.pixel_layer import PixelLayer
 
+PROP_POWER = 3
 
 class RotatingGradientLayer(PixelLayer):
     def __init__(self, maxx, maxy, pattern, rotating_speed, sx=0, sy=0):
@@ -13,9 +14,15 @@ class RotatingGradientLayer(PixelLayer):
 
     def _mix(self, mixer):
         ref_max = mixer[-1][0]
-        total_proportion = sum([ref_max - mixer_color[0] for mixer_color in mixer])
+        total_proportion = sum([(ref_max - mixer_color[0]) ** PROP_POWER for mixer_color in mixer])
+        if total_proportion == 0:
+            return tuple([
+                int(sum([self.reference_points[mixer_color[1]][k] for
+                         mixer_color in mixer]) / len(mixer))
+                for k in range(3)
+            ])
         return tuple([
-            int(sum([self.reference_points[mixer_color[1]][k] * (ref_max - mixer_color[0]) for mixer_color in mixer]) / total_proportion)
+            int(sum([self.reference_points[mixer_color[1]][k] * ((ref_max - mixer_color[0]) ** PROP_POWER) for mixer_color in mixer]) / total_proportion)
             for k in range(3)
         ])
 
